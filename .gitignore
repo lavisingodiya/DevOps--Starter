@@ -1,0 +1,3 @@
+.data/
+*.rdb
+api/.env

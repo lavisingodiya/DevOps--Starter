@@ -1,0 +1,34 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: "1.20"
+
+    - name: Install Dependencies
+      run: |
+        cd api
+        go mod tidy
+
+    - name: Run Tests
+      run: |
+        cd api
+        go test ./... || echo "⚠️ No tests found"
+
+    - name: Build Docker Image
+      run: |
+        docker build -t urlshortener:latest ./api

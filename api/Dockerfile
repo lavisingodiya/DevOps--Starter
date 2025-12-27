@@ -20,6 +20,7 @@ USER appuser
 
 COPY . /app
 COPY --from=builder /build/main /app/
+COPY .env /app/.env
 WORKDIR /app
 
 EXPOSE 6767

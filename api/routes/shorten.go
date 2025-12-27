@@ -86,7 +86,7 @@ func ShortenURL(c *fiber.Ctx) error {
 
 	// Set default expiry time (24 hours)
 	if req.Expiry == 0 {
-		req.Expiry = 24
+		req.Expiry = 24 * time.Hour
 	}
 
 	// Enforce Https, SSL
